@@ -1,0 +1,20 @@
+name: Echo Name
+
+on:
+  repository_dispatch:
+    types:
+      - echo
+
+jobs:
+  echo_name:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Echo Name Input
+        run: |
+          echo "Hello, ${{ github.event.client_payload.name }}!"
+        env:
+          NAME: ${{ github.event.client_payload.name }}
